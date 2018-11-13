@@ -204,6 +204,7 @@ function applyRasterProps(instance, props, prevProps = {}) {
 }
 
 function applyPointTextProps(instance, props, prevProps = {}) {
+  applyItemProps(instance, props, prevProps)
   if (props.content !== prevProps.content) {
     instance.content = props.content
   }
@@ -224,6 +225,12 @@ function applyPointTextProps(instance, props, prevProps = {}) {
       props.point[0] - prevProps.point[0],
       props.point[1] - prevProps.point[1],
     ])
+  }
+  if (props.rotation !== prevProps.rotation) {
+    // in case null is set
+    const rotation = props.rotation ? props.rotation : 0
+    const prevRotation = prevProps.rotation ? prevProps.rotation : 0
+    instance.rotate(rotation - prevRotation)
   }
 }
 
